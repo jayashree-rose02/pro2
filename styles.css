@@ -1,0 +1,37 @@
+:root{
+  --bg:#0a1020; --card:#0d1428; --muted:#9fb0ea; --accent:#06b6d4; --accent2:#8b5cf6;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,Segoe UI,system-ui,-apple-system;background:linear-gradient(180deg,#081025,#0a1328);color:#eaf0ff}
+.wrap{max-width:1100px;margin:0 auto;padding:18px}
+.topbar{background:linear-gradient(90deg,#081a3b,#0a224b);border-bottom:1px solid rgba(255,255,255,0.05)}
+.flex{display:flex;align-items:center;justify-content:space-between}
+.brand{font-weight:800;padding:12px 0}
+.actions{display:flex;gap:10px;align-items:center}
+.muted{color:rgba(230,238,255,0.7)}
+.center{text-align:center}
+.card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:16px;border-radius:12px;margin:14px 0;border:1px solid rgba(255,255,255,0.06)}
+.narrow{max-width:420px;margin:24px auto}
+.form label{display:block;margin-top:8px;font-weight:600}
+input,select{width:100%;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.03);color:#eaf0ff}
+.row{display:flex;gap:10px;align-items:center}
+.grow{flex:1}
+.btn{padding:9px 12px;border-radius:10px;border:0;background:linear-gradient(90deg,var(--accent),#0891b2);color:#021;cursor:pointer;font-weight:700}
+.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.12);color:#eaf0ff}
+.btn:hover{filter:brightness(1.05)}
+.error{color:#ffb4b4;margin-top:8px}
+.hint{display:block;margin-top:8px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:1fr 360px;gap:16px}
+@media(max-width:900px){.grid{grid-template-columns:1fr}}
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:900px){.feature-grid{grid-template-columns:1fr}}
+.feature{display:block;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:14px;text-decoration:none;color:#eaf0ff}
+.feature:hover{border-color:rgba(255,255,255,0.18)}
+.emoji{font-size:28px}
+.viewer-holder{min-height:460px;display:flex;align-items:center;justify-content:center}
+.grid-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:900px){.grid-cards{grid-template-columns:1fr}}
+.card-tile{padding:10px}
+.thumb{overflow:hidden;border-radius:10px}
+.tile-body{padding:8px 4px}
+.code{display:block;background:#0b1630;border:1px solid rgba(255,255,255,0.08);padding:6px;border-radius:8px;word-break:break-all}

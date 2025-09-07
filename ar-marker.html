@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>AR Hub — Scan Marker</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- A-Frame + AR.js -->
+  <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.min.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap flex">
+      <div class="brand">AR Hub — Scan a Marker</div>
+      <div class="actions">
+        <a href="dashboard.html" class="btn ghost">Back</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="card">
+      <p class="muted">Point your camera at a printed marker. Try <a href="https://raw.githubusercontent.com/AR-js-org/AR.js/master/three.js/data/HIRO.jpg" target="_blank">HIRO</a> or <a href="https://raw.githubusercontent.com/AR-js-org/AR.js/master/three.js/data/KANJI.png" target="_blank">KANJI</a>.</p>
+
+      <div class="viewer-holder">
+        <a-scene embedded arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;">
+          <!-- HIRO marker shows a helmet -->
+          <a-marker preset="hiro">
+            <a-entity gltf-model="https://cdn.jsdelivr.net/gh/KhronosGroup/glTF-Sample-Models@master/2.0/DamagedHelmet/glTF-Binary/DamagedHelmet.glb"
+                      scale="0.5 0.5 0.5"
+                      animation="property: rotation; to: 0 360 0; loop: true; dur: 9000"></a-entity>
+          </a-marker>
+
+          <!-- KANJI marker shows an avocado -->
+          <a-marker type="pattern" url="https://raw.githubusercontent.com/AR-js-org/AR.js/master/three.js/data/patt.kanji">
+            <a-entity gltf-model="https://cdn.jsdelivr.net/gh/KhronosGroup/glTF-Sample-Models@master/2.0/Avocado/glTF-Binary/Avocado.glb"
+                      scale="2 2 2"
+                      animation="property: rotation; to: 0 360 0; loop: true; dur: 12000"></a-entity>
+          </a-marker>
+
+          <a-entity camera></a-entity>
+        </a-scene>
+      </div>
+
+      <div class="row center">
+        <button class="btn" onclick="window.location.reload()">Restart Camera</button>
+      </div>
+      <p id="envMsg" class="muted center"></p>
+    </section>
+  </main>
+
+  <script src="app.js" defer></script>
+  <script>
+    // Simple environment tips
+    (function(){
+      const out = document.getElementById('envMsg');
+      const httpsOk = location.protocol==='https:' || location.hostname==='localhost';
+      const camOk = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
+      out.textContent = (httpsOk? 'HTTPS/localhost ✅' : 'HTTPS required ⚠️') + ' • ' + (camOk? 'Camera API ✅' : 'Camera not available ❌');
+    })();
+  </script>
+</body>
+</html>

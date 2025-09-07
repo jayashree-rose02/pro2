@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>AR Hub — Place in Room</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Google model-viewer for WebXR / Scene Viewer / Quick Look -->
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap flex">
+      <div class="brand">AR Hub — Place in Room</div>
+      <div class="actions">
+        <a href="dashboard.html" class="btn ghost">Back</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="card">
+      <div class="row">
+        <div class="grow">
+          <label for="modelSelect" class="muted">Choose a model</label>
+          <select id="modelSelect">
+            <option value="https://modelviewer.dev/shared-assets/models/Astronaut.glb|Astronaut">Astronaut</option>
+            <option value="https://modelviewer.dev/shared-assets/models/RobotExpressive.glb|Expressive Robot">Expressive Robot</option>
+            <option value="https://modelviewer.dev/shared-assets/models/Chair.glb|Chair">Chair</option>
+            <option value="https://modelviewer.dev/shared-assets/models/earth.glb|Globe">Globe</option>
+          </select>
+        </div>
+        <div class="row">
+          <button id="openShare" class="btn">Copy Share Link</button>
+        </div>
+      </div>
+
+      <div class="viewer-holder">
+        <model-viewer id="mv"
+          src="https://modelviewer.dev/shared-assets/models/Astronaut.glb"
+          alt="3D model"
+          camera-controls
+          auto-rotate
+          ar
+          ar-modes="webxr scene-viewer quick-look"
+          style="width:100%;height:460px;border-radius:10px;">
+        </model-viewer>
+      </div>
+      <p class="muted center">Tap the “AR” button on supported devices to place the model in your space.</p>
+      <p id="envMsg" class="muted center"></p>
+    </section>
+  </main>
+
+  <script src="app.js" defer></script>
+  <script>
+    (function(){
+      const sel = document.getElementById('modelSelect');
+      const mv = document.getElementById('mv');
+      const share = document.getElementById('openShare');
+      const params = new URLSearchParams(location.search);
+      const paramSrc = params.get('src'); const paramTitle = params.get('title');
+
+      if (paramSrc) { mv.src = paramSrc; }
+      if (paramTitle) { document.title = 'AR Hub — ' + decodeURIComponent(paramTitle); }
+
+      sel.addEventListener('change', () => {
+        const [src,title] = sel.value.split('|');
+        mv.src = src;
+        history.replaceState({}, '', `?src=${encodeURIComponent(src)}&title=${encodeURIComponent(title)}`);
+      });
+
+      share.addEventListener('click', async () => {
+        const u = location.href;
+        try { await navigator.clipboard.writeText(u); alert('Share link copied!'); }
+        catch { prompt('Copy this link:', u); }
+      });
+
+      // Env tips
+      const txt = [];
+      if (location.protocol==='https:' || location.hostname==='localhost') txt.push('HTTPS/localhost ✅');
+      else txt.push('HTTPS required ⚠️');
+      if (navigator.userAgent.toLowerCase().includes('android')) txt.push('Android: Chrome recommended');
+      if (navigator.userAgent.toLowerCase().includes('iphone') || navigator.userAgent.toLowerCase().includes('ipad')) txt.push('iOS: Safari/Quick Look');
+      document.getElementById('envMsg').textContent = txt.join(' • ');
+    })();
+  </script>
+</body>
+</html>

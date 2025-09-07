@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>AR Hub — Dashboard</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap flex">
+      <div class="brand">AR Hub — Dashboard</div>
+      <div class="actions">
+        <span id="userEmail" class="muted"></span>
+        <button id="logoutBtn" class="btn ghost">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap grid">
+    <section class="card">
+      <h2>Choose an AR Experience</h2>
+      <div class="feature-grid">
+        <a class="feature" href="ar-marker.html">
+          <div class="emoji">🧭</div>
+          <h3>Scan a Marker</h3>
+          <p class="muted">Point your camera at HIRO / KANJI to reveal 3D models.</p>
+        </a>
+
+        <a class="feature" href="ar-place.html">
+          <div class="emoji">📦</div>
+          <h3>Place in Your Room</h3>
+          <p class="muted">Pick a model and place it in your real space.</p>
+        </a>
+
+        <a class="feature" href="gallery.html">
+          <div class="emoji">🖼️</div>
+          <h3>Model Gallery</h3>
+          <p class="muted">Browse models and open directly in AR.</p>
+        </a>
+      </div>
+    </section>
+
+    <aside class="card">
+      <h3>Quick Start</h3>
+      <ul>
+        <li>Use Chrome (Android) or Safari (iOS).</li>
+        <li>Run on <b>HTTPS</b> or <b>localhost</b> so the camera works.</li>
+        <li>Print markers:
+          <a href="https://raw.githubusercontent.com/AR-js-org/AR.js/master/three.js/data/HIRO.jpg" target="_blank">HIRO</a>,
+          <a href="https://raw.githubusercontent.com/AR-js-org/AR.js/master/three.js/data/KANJI.png" target="_blank">KANJI</a>
+        </li>
+      </ul>
+
+      <h4>Share a model</h4>
+      <p class="muted">Deep link format:</p>
+      <code class="code">ar-place.html?src=&lt;GLB_URL&gt;&amp;title=My+Model</code>
+      <p class="muted">Example:</p>
+      <code class="code">ar-place.html?src=https://modelviewer.dev/shared-assets/models/Astronaut.glb&amp;title=Astronaut</code>
+    </aside>
+  </main>
+
+  <footer class="wrap muted center">Built with WebXR + AR.js + &lt;model-viewer&gt;</footer>
+  <script src="app.js" defer></script>
+</body>
+</html>
